@@ -6,6 +6,7 @@
 #include<conio.h>
 #include "EntryInDiary.h"
 #include "AllEntrySingleton.h"
+#include <map>
 
 void color(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -43,7 +44,6 @@ void setConsoleDimen() {
 
     MoveWindow(console, r.left, r.top, 800, 700, TRUE); // 800 width, 100 height
 }
-
 using namespace std;
 int set[] = { 12,7,7,7 };
 char counter = 0;
@@ -75,29 +75,57 @@ int main()
     }
 }
 void showListEntry() {
-    int move = 5, listCounter = 0;
+    int  listCounter = 0,nowShowing=0;
     vector<EntryInDiary> lis;
     lis = AllEntrySingleton::get().getEntryLibrary();
-    for (move = 0; move < 30 && listCounter < int(lis.size()); move += 4) {
-        color(8); gotoxy(42, move + 1);
-        cout << "\xDA";
-        for (int u = 0; u < 32; u++) cout << '\xC4';
-        cout << '\xBF';
-        gotoxy(42, move + 2); cout << '\xBA', color(7);
-        cout << "Title: " << lis[listCounter].getmTitle();
+    int const SZ = int(lis.size());
+    while (true) {
+        int nwGo = listCounter,move;
+        map<int, int> mp;
+        for (move = 0,nwGo=listCounter; move < 30&&move<4*SZ; move += 4,nwGo++) {
+            int colorCode = 8; nwGo %= SZ; mp[nwGo] = 1;
+            //for (int u = 2; u < 4&& nowShowing == nwGo; u++) {
+               // gotoxy(43,move+u); for (int v = 43; v <75; v++) cout << ' ';
+           // }
+            if (nowShowing == nwGo) colorCode = 12;
+            color(colorCode); gotoxy(42, move + 1);
+            cout << "\xDA";
+            for (int u = 0; u < 32; u++) cout << '\xC4';
+            cout << '\xBF';
+            gotoxy(42, move + 2); cout << '\xBA', color(7);
+            cout << "Date: /  /  ID: " << lis[nwGo].getmTitle();
 
 
-        color(8), gotoxy(42, move + 3); cout << '\xBA', color(7);
+            color(colorCode), gotoxy(42, move + 3); cout << '\xBA', color(7);
 
-        cout << lis[listCounter].getmContent();
-        color(8), gotoxy(75, move + 2); cout << '\xBA';
-        gotoxy(75, move + 3); cout << '\xBA';
+            cout << lis[nwGo].getmContent();
+            color(colorCode), gotoxy(75, move + 2); cout << '\xBA';
+            gotoxy(75, move + 3); cout << '\xBA';
 
-        gotoxy(42, move + 4); cout << '\xC0';
-        for (int u = 0; u < 32; u++) cout << '\xC4';
-        cout << '\xD9'; color(7);
-        listCounter++;
+            gotoxy(42, move + 4); cout << '\xC0';
+            for (int u = 0; u < 32; u++) cout << '\xC4';
+            cout << '\xD9'; color(7);
+            
+          
+        }
+        
+        char keyList = _getch();
+        if (keyList == 72) nowShowing--;
+        else if (keyList == 80) nowShowing++;
+        else if(keyList==27) break;
+        nowShowing +=SZ, nowShowing %= SZ;
+        if (!mp[nowShowing]) {
+            int tm;
+            if (nowShowing == (listCounter - 1 + SZ) % SZ)
+                tm=listCounter-1;
+            else tm=listCounter+1;
+            if (tm < 0)
+                listCounter = max(0, listCounter - 8 + SZ), listCounter %= SZ;
+            else if (tm+7== SZ) listCounter = 0;
+            else listCounter = tm;
+        }
     }
+    
 }
 void initialScreen() {
     int u; color(11); char sty = ':';
