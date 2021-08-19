@@ -92,11 +92,11 @@ void initialScreen() {
 
     gotoxy(10, 7);
     color(set[1]);
-    cout << "2. Activity Graph";
+    cout << "2. Make New Entry";
 
     gotoxy(10, 8);
     color(set[2]);
-    cout << "3. Make New Entry";
+    cout << "3. Settings";
 
     gotoxy(10, 9);
     color(set[3]);

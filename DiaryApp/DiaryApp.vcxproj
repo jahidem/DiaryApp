@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllEntrySingleton.cpp" />
     <ClCompile Include="DiaryApp.cpp" />
     <ClCompile Include="EntryInDiary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllEntrySingleton.h" />
     <ClInclude Include="EntryInDiary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

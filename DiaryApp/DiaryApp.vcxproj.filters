@@ -21,9 +21,15 @@
     <ClCompile Include="EntryInDiary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AllEntrySingleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EntryInDiary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllEntrySingleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
