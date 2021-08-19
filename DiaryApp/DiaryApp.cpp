@@ -52,9 +52,9 @@ void initialScreen();
 void showListEntry();
 int main()
 {  
-    cout<<AllEntrySingleton::get().ga();
+   
     setFontSize();
-
+    //gotoxy(0, 37); cout << AllEntrySingleton::get().ga();
     while (true) {
         setConsoleDimen();
         ShowConsoleCursor(false);
@@ -65,7 +65,7 @@ int main()
 
         else if (key == '\r') {
             if (counter == 3) exit(0);
-           //else if (counter == 0) showListEntry();
+           else if (counter == 0) showListEntry();
             else cout << "Menu " << counter + 1 << " is open";
         }
         counter += 4, counter %= 4;
@@ -74,10 +74,10 @@ int main()
 
     }
 }
-/*void showListEntry() {
-    int move = 5,listCounter=0;
+void showListEntry() {
+    int move = 5, listCounter = 0;
     vector<EntryInDiary> lis;
-    //lis=AllEntrySingleton::get()->getEntryLibrary();
+    lis = AllEntrySingleton::get().getEntryLibrary();
     for (move = 0; move < 30 && listCounter < int(lis.size()); move += 4) {
         color(8); gotoxy(42, move + 1);
         cout << "\xDA";
@@ -98,7 +98,7 @@ int main()
         cout << '\xD9'; color(7);
         listCounter++;
     }
-}*/
+}
 void initialScreen() {
     int u; color(11); char sty = ':';
     gotoxy(0, 0); for (u = 0; u <109; u++) cout<<sty;

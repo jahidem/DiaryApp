@@ -3,9 +3,9 @@
 #include "EntryInDiary.h"
 #include<vector>
 class AllEntrySingleton
-{
-    AllEntrySingleton();
-    ~AllEntrySingleton();
+{   
+private:
+    AllEntrySingleton() {};
     vector<EntryInDiary> entryLibrary;
 public:
     AllEntrySingleton(const AllEntrySingleton&) = delete;
