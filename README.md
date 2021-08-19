@@ -2,7 +2,8 @@
 ***making a terminal based diary***
 
 ```diff
-@@    Here are some features that are going to be implemented     @@
+@@    Here are some features that are going to be implemented   @@
+
 ! Terminal interface
 ! Menu for Selecting actions
 ! A Singleton for Runtime Data storing
