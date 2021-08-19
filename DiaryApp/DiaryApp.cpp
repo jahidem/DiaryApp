@@ -40,11 +40,11 @@ void setConsoleDimen() {
     RECT r;
     GetWindowRect(console, &r); //stores the console's current dimensions
 
-    MoveWindow(console, r.left, r.top, 800, 600, TRUE); // 800 width, 100 height
+    MoveWindow(console, r.left, r.top, 800, 700, TRUE); // 800 width, 100 height
 }
 
 using namespace std;
-int set[] = { 12,7,7 };
+int set[] = { 12,7,7,7 };
 char counter = 0;
 char key;
 void initialScreen();
@@ -53,10 +53,11 @@ int main()
 {
     EntryInDiary ma; gotoxy(10, 11);
     ma.hi();
-   // setConsoleDimen();
-    setFontSize();
     
+    setFontSize();
+
     while (true) {
+        setConsoleDimen();
         ShowConsoleCursor(false);
         initialScreen();
         key = _getch();
@@ -64,12 +65,12 @@ int main()
         else if (key == 80) counter++;
 
         else if (key == '\r') {
+            if (counter == 3) exit(0);
             cout << "Menu " << counter + 1 << " is open";
         }
-        counter += 3, counter %= 3;
-        for(int &x:set) x=7;
+        counter += 4, counter %= 4;
+        for (int& x : set) x = 7;
         set[counter] = 12;
-
 
     }
 }
@@ -83,8 +84,7 @@ void initialScreen() {
     for (u = 0; u < 39; u++) cout << '\xC4';
     cout << '*';
     for(u=4;u<36;u++) gotoxy(40,u),cout<<'\xB0';
-    gotoxy(0, 36); 
-    color(11); for (u = 0; u <109; u++) cout <<sty;
+   
 
     gotoxy(10, 6);
     color(set[0]);
@@ -97,5 +97,9 @@ void initialScreen() {
     gotoxy(10, 8);
     color(set[2]);
     cout << "3. Make New Entry";
-    cout << flush;
+
+    gotoxy(10, 9);
+    color(set[3]);
+    cout << "4. Exit";
+    
 }

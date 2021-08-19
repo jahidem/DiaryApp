@@ -8,6 +8,7 @@ class EntryInDiary
 {
 	string mTitle;
 	string mContent;
+	
 	public:
 	
 		void hi();
