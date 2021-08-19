@@ -15,4 +15,4 @@
 
 # Here is the progress until now:
       
-![Screenshot 2021-08-19 180405](https://user-images.githubusercontent.com/54525656/130065257-4063478d-a2fd-4279-87c0-14788132e709.png)
+<img src="https://github.com/jahidem/pc/blob/master/imagee/Screenshot%202021-08-20%20020020.png" width="600">
