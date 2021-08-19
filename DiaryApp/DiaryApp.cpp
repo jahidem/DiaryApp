@@ -22,6 +22,8 @@ char key;   // takes keyboard inputs
 void initialScreen();   // draws the initial UI
 void showListEntry();   // shows list on the right panel
 void clearRightPanel(); // clear al content int the right panel 
+void instructionToNav(int); // instructons on the lower left to navigate
+void newEntryWindow();
 int main()
 {  
    
@@ -31,13 +33,15 @@ int main()
         setConsoleDimen();
         ShowConsoleCursor(false);
         initialScreen();
+        color(8); instructionToNav(1);
         key = _getch();
         if (key == 72) counter--;
         else if (key == 80) counter++;
 
         else if (key == '\r') {
             if (counter == 3) exit(0);
-           else if (counter == 0) showListEntry();
+            else if (counter == 0) showListEntry();
+            else if (counter == 1) newEntryWindow();
             else cout << "Menu " << counter + 1 << " is open";
         }
         counter += 4, counter %= 4;
@@ -54,7 +58,7 @@ void showListEntry() {
     while (true) {
         int nwGo = listCounter,move;
         map<int, int> mp;
-  
+        color(8), instructionToNav(2);
         for (move = 0,nwGo=listCounter; move < 30&&move<4*SZ; move += 4,nwGo++) {
             int colorCode = 8; nwGo %= SZ; mp[nwGo] = 1;
             for (int u = 2; u < 4; u++) {//works fine for refreshing but casuses gliching
@@ -120,19 +124,19 @@ void initialScreen() {
     for (u = 4; u < 33; u++) gotoxy(40, u), cout << '\xB0';
     color(7);
 
-    gotoxy(10, 6);
+    gotoxy(8, 6);
     color(set[0]);
     cout << "Show List of Entry";
 
-    gotoxy(10, 8);
+    gotoxy(8, 8);
     color(set[1]);
     cout << "Make New Entry";
 
-    gotoxy(10, 10);
+    gotoxy(8, 10);
     color(set[2]);
     cout << "Settings";
 
-    gotoxy(10, 12);
+    gotoxy(8, 12);
     color(set[3]);
     cout << "Exit";
     
@@ -178,4 +182,21 @@ void clearRightPanel() {
     for (int u = 1; u <= 32; u++) {
         for (int v = 42; v <= 75; v++) gotoxy(v, u), cout << ' ';
     }
+}
+
+void instructionToNav(int tip) {
+    switch (tip) {
+    case 1:
+        gotoxy(1,26),cout << "\xC9 Arrow up/down to navigate menus \xBB";
+        gotoxy(1,27),cout << "\xC8 Enter key to select             \xBC";
+        break;
+    case 2:
+        gotoxy(1, 26), cout << "\xC9 Arrow up/down to navigate List  \xBB";
+        gotoxy(1, 27), cout << "\xC8 Enter to select/ESC to quit     \xBC";
+        break;
+    }
+}
+
+void newEntryWindow() {
+
 }
