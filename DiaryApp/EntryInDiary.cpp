@@ -17,7 +17,7 @@ int EntryInDiary::getmId()
 
 void EntryInDiary::hi()
 {
-	cout<<"hiiii\ng";
+	cout<<" ";
 }
 
 void EntryInDiary::setmTitle(string title)
