@@ -4,7 +4,7 @@
 ```diff
 @@    Here are some features that are going to be implemented   @@
 
-! Terminal interface
+! Terminal user interface
 ! Menu for Selecting actions
 ! A Singleton for Runtime Data storing
 ! C File for permanent data storing
