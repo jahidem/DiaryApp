@@ -22,9 +22,8 @@ public:
     {
         for (int u = 0; u < 20; u++) {
             EntryInDiary newEntry;
-            newEntry.setmTitle("Title " + to_string(u + 1));
             newEntry.setmId(u);
-            newEntry.setmContent("Content number" + to_string(u));
+            newEntry.setmContent("kisu elsdfg gf fg fdg g fdg fdg fdgfg  ghghgh");
             entryLibrary.push_back(newEntry);
         }
         return entryLibrary;

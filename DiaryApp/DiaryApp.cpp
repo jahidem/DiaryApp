@@ -8,12 +8,7 @@
 #include "AllEntrySingleton.h"  // Holds all the entryInDiary remains 
          //throughout the liftime of the application
 #include <map>
-
-void color(int color);  // just picks a color for output on terminal
-void gotoxy(int x, int y);  // moves the cursor to the position
-void ShowConsoleCursor(bool visible);   // to show or hide console cursor
-void setFontSize(); // set the font family,size.weight etc
-void setConsoleDimen(); // set the height and width of console
+#include"customFunctions.h"
 using namespace std;
 int set[] = { 12,7,7,7 };   // just some numbers for colors of the Menu
 char counter = 0;   // indicates which item of the Menu is active
@@ -58,14 +53,14 @@ void showListEntry() {
     while (true) {
         int nwGo = listCounter,move;
         map<int, int> mp;
-        color(8), instructionToNav(2);
+        color(8), instructionToNav(2); 
         for (move = 0,nwGo=listCounter; move < 30&&move<4*SZ; move += 4,nwGo++) {
             int colorCode = 8; nwGo %= SZ; mp[nwGo] = 1;
-            for (int u = 2; u < 4; u++) {//works fine for refreshing but casuses gliching
+            //for (int u = 2; u < 4; u++) {//works fine for refreshing but casuses gliching
                 //need to be fixed
-                gotoxy(43, move + u); for (int v = 43; v < 75; v++) cout << ' ';
-            }
-        
+               // gotoxy(43, move + u); for (int v = 43; v < 75; v++) cout << ' ';
+            //}
+            
 
             if (nowShowing == nwGo) colorCode = 12;
             color(colorCode); gotoxy(42, move + 1);
@@ -73,12 +68,12 @@ void showListEntry() {
             for (int u = 0; u < 32; u++) cout << '\xC4';
             cout << '\xBF';
             gotoxy(42, move + 2); cout << '\xBA', color(7);
-            cout << "Date: /  /             ID: 000" << lis[nwGo].getmId();
+            cout <<lis[nwGo].getmDate()<<"             ID:" << lis[nwGo].getStringId();
 
 
             color(colorCode), gotoxy(42, move + 3); cout << '\xBA', color(7);
 
-            cout << lis[nwGo].getmContent();
+            cout <<lis[nwGo].getmTitle();
             color(colorCode), gotoxy(75, move + 2); cout << '\xBA';
             gotoxy(75, move + 3); cout << '\xBA';
 
@@ -141,43 +136,7 @@ void initialScreen() {
     cout << "Exit";
     
 }
-void color(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
 
-void gotoxy(int x, int y) {
-    COORD c;
-    c.X = x;
-    c.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
-}
-void ShowConsoleCursor(bool visible) {
-    CONSOLE_CURSOR_INFO info;
-    info.dwSize = 100;
-    info.bVisible = visible;
-    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-}
-
-void setFontSize() {
-    CONSOLE_FONT_INFOEX cfi;
-    cfi.cbSize = sizeof(cfi);
-    cfi.nFont = 0;
-    cfi.dwFontSize.X = 0;                   // Width of each character in the font
-    cfi.dwFontSize.Y = 20;                  // Height
-    cfi.FontFamily = FF_DONTCARE;
-    cfi.FontWeight = FW_BOLD;
-    // std::wcscpy(cfi.FaceName, L"Consolas"); // Choose your font
-    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
-
-    //std::cout << "Font: Consolas, Size: 18\n";
-}
-void setConsoleDimen() {
-    HWND console = GetConsoleWindow();
-    RECT r;
-    GetWindowRect(console, &r); //stores the console's current dimensions
-
-    MoveWindow(console, r.left, r.top, 800, 720, TRUE); // 800 width, 100 height
-}
 void clearRightPanel() {
     for (int u = 1; u <= 32; u++) {
         for (int v = 42; v <= 75; v++) gotoxy(v, u), cout << ' ';
@@ -187,12 +146,12 @@ void clearRightPanel() {
 void instructionToNav(int tip) {
     switch (tip) {
     case 1:
-        gotoxy(1,26),cout << "\xC9 Arrow up/down to navigate menus \xBB";
-        gotoxy(1,27),cout << "\xC8 Enter key to select             \xBC";
+        gotoxy(3,29),cout << "\xC9 Arrow up/down to navigate menus \xBB";
+        gotoxy(3,30),cout << "\xC8 Enter key to select             \xBC";
         break;
     case 2:
-        gotoxy(1, 26), cout << "\xC9 Arrow up/down to navigate List  \xBB";
-        gotoxy(1, 27), cout << "\xC8 Enter to select/ESC to quit     \xBC";
+        gotoxy(3, 29), cout << "\xC9 Arrow up/down to navigate List  \xBB";
+        gotoxy(3, 30), cout << "\xC8 Enter to select/ESC to quit     \xBC";
         break;
     }
 }

@@ -140,12 +140,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AllEntrySingleton.cpp" />
+    <ClCompile Include="customFunctions.cpp" />
     <ClCompile Include="DiaryApp.cpp" />
     <ClCompile Include="EntryInDiary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllEntrySingleton.h" />
+    <ClInclude Include="customFunctions.h" />
     <ClInclude Include="EntryInDiary.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DiaryApp.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Store.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
