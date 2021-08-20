@@ -72,19 +72,20 @@ void showListEntry() {
             //cout << "\xDA";
             //for (int u = 0; u < 32; u++) cout << '\xC4';
             //cout << '\xBF';
+     
+            cout << '[', color(textColor);
+            cout << lis[nwGo].getmDate();
+            color(colorCode),cout << ']'; color(8);
+            cout<< "             #" << lis[nwGo].getStringId();
+            color(colorCode);
+            gotoxy(42, move + 2); cout << '\xDA';
+            for (int u = 0; u < 32; u++) cout << '\xC4';
 
-            cout << '\xBA', color(textColor);
-            cout << lis[nwGo].getmDate() << "             ID:" << lis[nwGo].getStringId();
-            color(colorCode), cout<< '\xBA';
-            gotoxy(42, move + 2); cout << '\xBA';
-            
-
-
-            gotoxy(42, move + 3); cout << '\xBA', color(textColor);
+            gotoxy(42, move + 3); cout << '\xB3', color(textColor);
 
             cout <<lis[nwGo].getmTitle()<<". . .";
-            color(colorCode), gotoxy(75, move + 2); cout << '\xBA';
-            gotoxy(75, move + 3); cout << '\xBA';
+            color(colorCode), gotoxy(75, move + 2); cout << '\xBF';
+            gotoxy(75, move + 3); cout << '\xB3';
 
             gotoxy(42, move + 4); cout << '\xC0';
             color(colorCode); for (int u = 0; u < 32; u++) cout << '\xC4';
@@ -147,7 +148,7 @@ void initialScreen() {
 }
 
 void clearRightPanel() {
-    for (int u = 1; u <= 32; u++) {
+    for (int u = 1; u <= 33; u++) {
         for (int v = 42; v <= 75; v++) gotoxy(v, u), cout << ' ';
     }
 }
