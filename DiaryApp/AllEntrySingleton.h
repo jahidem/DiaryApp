@@ -5,6 +5,7 @@
 class AllEntrySingleton
 {   
 private:
+    static int id;
     AllEntrySingleton() {};
     vector<EntryInDiary> entryLibrary;
 public:
@@ -18,20 +19,8 @@ public:
         static AllEntrySingleton instance;
         return instance;
     }
-    vector<EntryInDiary> getEntryLibrary()
-    {
-        for (int u = 0; u < 20; u++) {
-            EntryInDiary newEntry;
-            newEntry.setmId(u);
-            newEntry.setmContent("kisu elsdfg gf fg fdg g fdg fdg fdgfg  ghghgh");
-            entryLibrary.push_back(newEntry);
-        }
-        return entryLibrary;
-    }
-    int ga() {
-        return 9;
-    }
-
+    vector<EntryInDiary> getEntryLibrary();
+    void addNewEntry(string);
         
 };
 
